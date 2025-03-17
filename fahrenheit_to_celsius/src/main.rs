@@ -1,10 +1,8 @@
 use std::io;
 
 // Improvements:
-// - handle negative numbers
 // - handle precision problems, eg: 123°F => 50.56°C, 50.56°C => 123.01°F
 // - implement switch mode with second loop
-// - handle empty input
 
 fn main() {
     println!("Convert temperatures between Fahrenheit and Celsius.");
@@ -17,6 +15,10 @@ fn main() {
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line.");
+
+        if input.trim().is_empty() {
+            continue;
+        }
 
         if input.trim() == "exit" {
             break;
