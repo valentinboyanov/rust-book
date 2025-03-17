@@ -4,6 +4,7 @@ use std::io;
 // - handle negative numbers
 // - handle precision problems, eg: 123°F => 50.56°C, 50.56°C => 123.01°F
 // - implement switch mode with second loop
+// - handle empty input
 
 fn main() {
     println!("Convert temperatures between Fahrenheit and Celsius.");
@@ -30,14 +31,10 @@ fn main() {
             .parse()
             .expect("Failed to parse temperature.");
 
-        if  temp_unit == Some('F') {
-            let temp_to: f64 = to_celsius(temp_from);
-            println!("{temp_from:.2}°F => {temp_to:.2}°C",);
-        } else if temp_unit == Some('C') {
-            let temp_to: f64 = to_fahrenheit(temp_from);
-            println!("{temp_from:.2}°C => {temp_to:.2}°F",);
-        } else {
-            println!("Unknown unit.");
+        match temp_unit {
+            Some('F') => println!("{temp_from:.2}°F => {:.2}°C", to_celsius(temp_from)),
+            Some('C') => println!("{temp_from:.2}°C => {:.2}°F", to_fahrenheit(temp_from)),
+            _ => println!("Unknown unit."),
         }
     }
 }
