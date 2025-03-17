@@ -32,13 +32,21 @@ fn main() {
             .expect("Failed to parse temperature.");
 
         if  temp_unit == Some('F') {
-            let temp_to: f64 = (temp_from - 32.0) / (9.0/5.0);
-            println!("{temp_from}°F => {temp_to:.2}°C",);
+            let temp_to: f64 = to_celsius(temp_from);
+            println!("{temp_from:.2}°F => {temp_to:.2}°C",);
         } else if temp_unit == Some('C') {
-            let temp_to: f64 = temp_from * (9.0/5.0) + 32.0;
-            println!("{temp_from}°C => {temp_to:.2}°F",);
+            let temp_to: f64 = to_fahrenheit(temp_from);
+            println!("{temp_from:.2}°C => {temp_to:.2}°F",);
         } else {
             println!("Unknown unit.");
         }
     }
+}
+
+fn to_fahrenheit(temperature: f64) -> f64 {
+    temperature * (9.0/5.0) + 32.0
+}
+
+fn to_celsius(temperature: f64) -> f64 {
+    (temperature - 32.0) / (9.0/5.0)
 }
