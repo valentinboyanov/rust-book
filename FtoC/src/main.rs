@@ -3,7 +3,6 @@ use std::io;
 // Improvements:
 // - handle negative numbers
 // - handle precision problems, eg: 123°F => 50.56°C, 50.56°C => 123.01°F
-// - add unit tests
 // - implement switch mode with second loop
 
 fn main() {
@@ -49,4 +48,19 @@ fn to_fahrenheit(temperature: f64) -> f64 {
 
 fn to_celsius(temperature: f64) -> f64 {
     (temperature - 32.0) / (9.0/5.0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_to_celsius() {
+        assert_eq!(to_celsius(122.0), 50.0);
+    }
+
+    #[test]
+    fn test_to_fahrenheit() {
+        assert_eq!(to_fahrenheit(0.0), 32.0);
+    }
 }
